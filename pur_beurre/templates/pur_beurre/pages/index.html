@@ -1,0 +1,96 @@
+{% extends 'pur_beurre/layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<header class="masthead text-center text-white d-flex">
+    <div class="container my-auto" id="homepagetextblock">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <h1 class="text-uppercase">
+                    <strong>Du gras, oui, <br>mais de qualité !</strong>
+                </h1>
+                <hr>
+            </div>
+            <div class="col-lg-8 mx-auto">
+                <h2 class="header-subtitle">
+                    Trouvez un produit de substitution pour ceux que vous consommez tous les jours.
+                </h2>
+                <form action="{%  url 'pur-beurre-results' %}" method="get" class="'col-lg-6">
+                    <div class="input-group">
+                        {{ form.food }}
+                        <div class="input-group-append">
+                        <button class="input-group-text" type="submit" id="foodsearch">Rechercher</button>
+{#                        <span class="input-group-text" >Rechercher</span>#}
+                    </div>
+                    </form>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Colette et Remy</h2>
+                <hr class="my-4">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto text-center">
+                <p class="text-muted mb-0">Pur Beurre est l'initiative de deux amoureux de la gastronomie française, Colette Tatou et Rémy, que vous avez déjà certainement rencontrés dans notre excellent restaurant Ratatouille.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <img class="sr-icons img-about" src="{% static 'pur_beurre/img/colette-4.jpg' %}" alt="">
+                    <h3 class="mb-3">Colette Tatou</h3>
+                    <p class="description text-muted mb-lg-0">"Nous aimons tous manger, surtout en France ! Personnellement, une baguette fraîche, du bon fromage de chèvre et un bon vin rouge me suffisent amplement. Comme tout le monde, je fais mes courses au supermarché. Mais petit à petit je me suis rendue compte, surtout lorsque nous avons ouvert le restaurant, que je pouvais remplacer les produits aseptisés que j'avais l'habitude d'acheter par de bons produits du terroir,  et souvent pour le même prix !"
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <img class="sr-icons img-about" src="{% static 'pur_beurre/img/remy.jpg' %}" alt="">
+                    <h3 class="mb-3">Remy</h3>
+                    <p class="description text-muted mb-0">"Pour ma part je me rendais déjà dans bien des magasins car j'aime beaucoup me balader, surtout dans les caves et les cuisines. Je connaissais par coeur le contenu des boutiques bio (dont je raffole) ainsi que les ingrédients de tous les aliments vendus. Lorsque Colette m'a demandé si elle pouvait remplacer son Nutella matinal par un aliment plus sain, je savais tout de suite où le trouver. L'idée de Pur Beurre était née !"</h3>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="section-heading">Contactez-nous !</h2>
+                <hr class="my-4">
+                <p class="mb-5">Nous sommes disponibles si vous avez des questions, des suggestions ou des remarques !</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 ml-auto text-center">
+                <i class="fa fa-phone fa-3x mb-3 sr-contact"></i>
+                <p>111-111-1111</p>
+            </div>
+            <div class="col-lg-4 mr-auto text-center">
+                <i class="fa fa-envelope fa-3x mb-3 sr-contact"></i>
+                <p>
+                    <a href="mailto:contact@purbeurre.com">contact@purbeurre.com</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock content %}

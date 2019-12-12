@@ -1,0 +1,46 @@
+
+{% extends "pur_beurre/layouts/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section id="login">
+   <div class="container my-auto">
+       <div class="row">
+           <div class="col-lg-8 mx-auto">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="container">
+                        <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+           {% if next %}
+                       <div class="container">
+                        <div class="alert alert-warning">
+                        Vous devez vous connecter pour effectuer cette action.
+                        </div>
+                    </div>
+           {% endif %}
+           <div class="content-section">
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Connexion</legend>
+                        {{ form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn" type="submit">Connexion</button>
+                    </div>
+                </form>
+                <div class="border-top pt-3">
+                    <small class="text-muted">
+                        Vous n'avez pas de compte ? <a class="ml-2" href="{% url 'register' %}">Inscrivez vous !</a>
+                    </small>
+                </div>
+            </div>
+           </div>
+       </div>
+   </div>
+</section>
+{% endblock content %}

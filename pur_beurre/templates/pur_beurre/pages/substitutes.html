@@ -1,0 +1,92 @@
+{% extends 'pur_beurre/layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<section id="subs">
+    {% if queryset %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 text-center">
+                {% if basefood.image  %}
+                <img class="sr-icons img-product" src="{{ basefood.image}}" alt="">
+                {% else %}
+                <img class="sr-icons img-product" src="{%  static 'pur_beurre/img/no-pic.png' %}" alt="">
+                {% endif %}
+            </div>
+            <div class="col-lg-4 text-center">
+                {% if basefood.nutriscore  %}
+                <img src="https://static.openfoodfacts.org/images/misc/nutriscore-{{ basefood.nutriscore.lower }}.svg" alt="">
+                {% else %}
+                <img class="sr-icons img-product" src="{%  static 'pur_beurre/img/no-pic.png' %}" alt="">
+                <div>Nutriscore Inconnu</div>
+                {% endif %}
+            </div>
+            </div>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">
+                    {{ basefood.name }}
+                    {% if basefood.brand %}
+                    de la marque {{ basefood.brand }}
+                    {% endif %}
+                     </h2>
+                    <a href="{% url 'pur-beurre-food' id=basefood.id %}">Voir la page produit.</a> |
+                    <a href="https://fr-en.openfoodfacts.org/product/{{ basefood.description }}" target="_blank">Voir sur Open food facts.</a> |
+                        {% if user.is_authenticated %}
+                    <form class="save-link" action="{% url 'pur-beurre-save' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="food_id" value="{{ basefood.id }}">
+                        <button type="submit" class="btn btn-outline-dark">
+                            <i class="fas fa-save"></i> Sauvegarder
+                        </button>
+                    </form>
+                        {% endif %}
+                    <hr class="my-4">
+                    <h3>Produits de substitution ayant un meilleur nutriscore :</h3>
+                </div>
+            </div>
+        </div>
+    <div class="container">
+        {% for subset in queryset %}
+        <div class="row">
+        {% for food in subset %}
+            <div class="col-lg-4 col-md-4 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <a href="{% url 'pur-beurre-food' id=food.id %}">
+                    {% if food.image %}
+                    <img class="sr-icons img-product" src="{{ food.image }}" alt="">
+                    {% else %}
+                    <img class="sr-icons img-product" src="{%  static 'pur_beurre/img/no-pic.png' %}" alt="">
+                    {% endif %}
+                    <span class="nutriscore {{ food.nutriscore }}">{{ food.nutriscore|upper}}</span>
+                    <div class="mb-3 ba">{{ food.name}}</div></a>
+{#                    <p class="description text-muted mb-lg-0">{{ food.generic_name}}</p>#}
+                    {% if user.is_authenticated %}
+                    <form class="save-link" action="{% url 'pur-beurre-save' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="food_id" value="{{ food.id }}">
+                        <button type="submit" class="btn btn-outline-dark">
+                          <i class="fas fa-save"></i> Sauvegarder
+                        </button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <div class="row">
+            <div class="col-lg-10 mx-auto text-center">
+                Nous n'avons pas trouvé de produit de substitution.
+            </div>
+        </div>
+
+    {% endif %}
+</section>
+
+
+{% endblock content %}

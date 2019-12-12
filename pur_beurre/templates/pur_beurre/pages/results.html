@@ -1,0 +1,66 @@
+{% extends 'pur_beurre/layouts/base.html' %}
+{% load static %}
+
+
+{% block content %}
+  <section class="page-section h-25 first_section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-auto">
+          <h1 class="section_title text-center">{{ request.GET.food }}</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section h-auto">
+    <div class="container my-auto">
+      {% if queryset %}
+        <h2 class="text-center my-5">Cliquez sur un aliment pour avoir une liste de substituts</h2>
+        {% for subset in queryset %}
+          <div class="row">
+            {% for food in subset %}
+              <div class="col-lg-4 col-sm-12 justify-content-center">
+                <div class="product_block mx-auto">
+                  <a href="{% url 'pur-beurre-substitutes' id=food.id %}">
+                    <center><img src="{{ food.image }}" alt="food_image" class="sr-icons img-product"></center>
+                  </a>
+                  <p class="text-center food_title">{{ food.name }} de la marque {{ food.brand }}</p>
+                  {% if user.is_authenticated %}
+                    <div class="save_button_placeholder"></div>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+        <div class="pagination row justify-content-center my-5">
+    <span class="step-links">
+        {% if queryset.has_previous %}
+          <a href="?food={{ request.GET.food }}&page=1">&laquo; Début</a>
+          <a href="?food={{ request.GET.food }}&page={{ queryset.previous_page_number }}">précedente</a>
+        {% endif %}
+
+      <span class="current">
+            Page {{ queryset.number }} de {{ queryset.paginator.num_pages }}.
+        </span>
+
+      {% if queryset.has_next %}
+        <a href="?food={{ request.GET.food }}&page={{ queryset.next_page_number }}">suivante</a>
+        <a href="?food={{ request.GET.food }}&page={{ queryset.paginator.num_pages }}">Fin &raquo;</a>
+      {% endif %}
+    </span>
+        </div>
+      {% else %}
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <h1>Pas de résultats !</h1>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+  </section>
+{% endblock %}
+

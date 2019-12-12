@@ -1,0 +1,49 @@
+{% extends 'pur_beurre/layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section id="food">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 text-center">
+                {% if food.image  %}
+                <img class="sr-icons img-product" src="{{ food.image}}" alt="">
+                {% else %}
+                <img class="sr-icons img-product" src="{%  static 'pur_beurre/img/no-pic.png' %}" alt="">
+                {% endif %}
+            </div>
+            <div class="col-lg-4 text-center">
+                <img src="https://static.openfoodfacts.org/images/misc/nutriscore-{{ food.nutriscore.lower }}.svg" alt="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">
+                    {{ food.name }}
+                    {% if food.brand %}
+                    de la marque {{ food.brand }}
+                    {% endif %}
+                </h2>
+                <a href="{% url 'pur-beurre-substitutes' id=food.id %}">Voir les produits de substitution.</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-lg-12 text-center"><h4>Ingrédients</h4>
+                <p>{{ food.openfoodfacts_link }}</p>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p><a href="https://fr-en.openfoodfacts.org/product/{{ food.description }}" target="_blank">Lien Open Food Facts</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {% if title %}
+    <title>Pur Beurre - {{ title }}</title>
+    {% else %}
+    <title>Pur Beurre</title>
+    {% endif %}
+
+    <link rel="shortcut icon" type="image/png" href="{% static 'pur_beurre/img/logo_pur_beurre-favicon.png' %}"/>
+
+     <!-- Bootstrap core CSS -->
+    <link href="{% static 'pur_beurre/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+     <link href="{% static 'pur_beurre/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+  <!-- Google Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+      <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet" type="text/css">
+
+  <!-- Plugin CSS -->
+    <link href="{% static 'pur_beurre/vendor/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
+
+  <!-- Theme CSS - Includes Bootstrap -->
+    <link href="{% static 'pur_beurre/css/creative.min.css' %}" rel="stylesheet">
+<link  href="{% static 'pur_beurre/css/style.css' %}" rel="stylesheet">
+
+    <link rel="shortcut icon" type="image/png" href="{% static 'pur_beurre/img/logo_pur_beurre-favicon.png' %}"/>
+
+</head>
+
+<body id="page-top">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="{% url 'pur-beurre-index' %}"><img class="logo-small" src="{% static 'pur_beurre/img/logo_pur_beurre.png' %}" alt=""> Pur Beurre</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                        <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item text-center">
+                        <form class="form-inline ml-auto my-2 my-lg-0" action="{% url 'pur-beurre-results' %}" method="get">
+                        <input type="text" name="food" class="form-control" placeholder="Rechercher" aria-label="rechercher" maxlength="500" required="" id="id_food" autocomplete="off">
+                         </form>
+                    </li>
+                    <li class="nav-item text-center">
+                        <a class="nav-link js-scroll-trigger" href="{% url 'pur-beurre-index' %}#about">A propos</a>
+                    </li>
+
+                    <li class="nav-item text-center">
+                        <a title="Profil utilisateur" class="nav-link js-scroll-trigger" href="{% url 'profile' %}"><i class="fa fa-user fa-2x"></i></a>
+                    </li>
+                    <li class="nav-item text-center">
+                        <a title="Produits sauvegardés" class="nav-link js-scroll-trigger" href="{% url 'saved-products' %}"><img src="{% static 'pur_beurre/img/noun_Carrot_29691_grey.png' %}" alt="" class="carrot"></a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item text-center">
+                        <a title="Deconnexion" class="nav-link js-scroll-trigger" href="{% url 'logout' %}"><i class="fa fa-sign-out-alt fa-2x"></i></a>
+                    </li>
+                    {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% block content %}{% endblock content %}
+
+  <script src="{% static 'pur_beurre/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'pur_beurre/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <script src="{% static 'pur_beurre/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'pur_beurre/vendor/scrollreveal/scrollreveal.min.js' %}"></script>
+  <script src="{% static 'pur_beurre/vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+
+  <script src="{% static 'pur_beurre/js/creative.min.js' %}"></script>
+
+
+<footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 text-center">
+                    <span><a href="{% url 'legal_notices' %}" class="footer-link">Mention légales</a></span>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <span><a href="{% url 'pur-beurre-index' %}#contact" class="footer-link">Contact</a></span>
+                </div>
+            </div>
+        </div>
+</footer>
+
+</body>
+</html>

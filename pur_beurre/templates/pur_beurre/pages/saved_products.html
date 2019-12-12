@@ -1,0 +1,57 @@
+{% extends 'pur_beurre/layouts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <section id="user_account_section_block_top" class="page-section h-25 first_section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h1 class="section_title text-center">Produits sauvés par {{ user }}</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+      {% if queryset %}
+        {% for subset in queryset %}
+      <div class="row">
+            {% for food in subset %}
+              <div class="col-lg-4 col-md-4 text-center">
+                <div class="service-box mt-5 mx-auto">
+                  <a href="{% url 'pur-beurre-food' id=food.saved_product.id %}">
+                    <img src="{{ food.saved_product.image }}" alt="food_image" class="sr-icons img-product">
+                  </a>
+                     <span class="nutriscore {{ food.saved_product.nutriscore }}">{{ food.saved_product.nutriscore|upper}}</span>
+                  <p class="text-center food_title">{{ food.saved_product.name }} par {{ food.saved_product.brand }}</p>
+                </div>
+              </div>
+            {% endfor %}
+      </div>
+        {% endfor %}
+        <div class="pagination row justify-content-center my-5">
+        <span class="step-links">
+        {% if queryset.has_previous %}
+          <a href="?food={{ request.GET.food }}&page=1">&laquo; Début</a>
+          <a href="?food={{ request.GET.food }}&page={{ queryset.previous_page_number }}">précedente</a>
+        {% endif %}
+          <span class="current">
+          Page {{ queryset.number }} de {{ queryset.paginator.num_pages }}.
+        </span>
+          {% if queryset.has_next %}
+            <a href="?food={{ request.GET.food }}&page={{ queryset.next_page_number }}">suivante</a>
+            <a href="?food={{ request.GET.food }}&page={{ queryset.paginator.num_pages }}">Fin &raquo;</a>
+          {% endif %}
+        </span>
+        </div>
+      {% else %}
+        <div class="row justify-content-center">
+          <div class="col-lg-4">
+            <h2 class="text-center">Aucun aliment enregistré</h2>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

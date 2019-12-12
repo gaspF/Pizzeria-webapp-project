@@ -1,0 +1,43 @@
+{% extends 'pur_beurre/layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section id="legal">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 text-center">
+                <img class="sr-icons img-product" src="{{ foodr.image}}" alt="">
+            </div>
+            <div class="col-lg-4 text-center">
+                <img src="https://static.openfoodfacts.org/images/misc/nutriscore-{{ foodr.nutriscore.lower }}.svg" alt="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">{{ foodr.name }} de la marque {{ foodr.brand }}</h2>
+            </div>
+        </div>
+    </div>
+    <hr class="my-4">
+    {% if message_already_saved %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p>{{ message_already_saved }}</p>
+                <p>Vous pouvez retrouver vos produits enregistrés sur <a href="">votre page produits sauvegardés.</a></p>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p>Le produit a bien été sauvegardé.</p>
+                <p>Vous pouvez retrouver vos produits enregistrés sur <a href="{% url 'saved-products' %}">votre page produits sauvegardés.</a></p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</section>
+{% endblock content %}

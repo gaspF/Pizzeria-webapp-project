@@ -1,1 +1,1 @@
-web: gunicorn projet_8.wsgi --log-file -
+web: gunicorn OCRnutella.wsgi --log-file -

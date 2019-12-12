@@ -26,7 +26,7 @@ SECRET_KEY = '5+(d#sh6)vxo4j2a+1tfe^0h-+hq6wdkx=a%bbx2@vxe$uv0h7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [purbeurregaspf.herokuapp.com]
+ALLOWED_HOSTS = ['purbeurregaspf.herokuapp.com']
 
 
 # Application definition

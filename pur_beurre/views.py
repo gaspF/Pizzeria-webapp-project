@@ -132,17 +132,17 @@ class SaveProduct(View):
         food_num = request.POST['food_id']
         food = Product(id=food_num)
         foodr = Product.objects.get(id=food_num)
+        context_dict = {'foodr': foodr}
 
         try:
             save = SavedProduct(saved_by=request.user, saved_product=food)
             save.save()
-            context_dict = {'foodr': foodr}
             print(foodr.name)
-
         except IntegrityError as error:
             print(error)
-            message_already_saved = "Vous avez déjà enregistré ce produit précédemment, " \
-                                    "il n'a pas été rajouté à votre liste de produits sauvegardés."
+            already_saved = "Ce produit figure déjà dans vos favoris"
+            context_dict = {'foodr': foodr,
+                            'already_saved': already_saved}
 
         return render(request, "pur_beurre/pages/save.html", context_dict)
 

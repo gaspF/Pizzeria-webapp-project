@@ -1,0 +1,248 @@
+.logo-small{
+    height: 1.5em;
+}
+
+.carrot{
+    height: 2em;
+}
+
+#homepagetextblock{
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 20px 20px rgba(0,0,0,0.3);
+}
+
+h1{
+    color: #fff;
+    font-family: "Open Sans", sans-serif;
+    text-shadow: 0 1px 1px black, 1px 0 1px black;
+}
+
+h2{
+    color: #000000;
+    font-family: "Open Sans", sans-serif;
+}
+
+
+}
+.food_title {
+}
+
+.food_image {
+    display: block;
+    height: 400px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 1rem;
+}
+
+.first_section {
+    background-image: url("../img/header.1f65a4911c65.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.row div{
+    font-family: "Scope One", sans-serif;
+}
+
+.description a:hover {
+    text-decoration: none;
+}
+
+.save-link{
+    /*font-size: 1.5em;*/
+}
+
+h3.mb-3.ba{
+    height:2em;
+    font-size: x-large;
+}
+.header-subtitle{
+    color: #fff;
+    font-family: "Scope One", sans-serif;
+    text-shadow: 0 1px 1px black, 1px 0 1px black;
+}
+
+.section_title{
+    color: #fff;
+    font-family: "Scope One", sans-serif;
+    text-shadow: 0 1px 1px black, 1px 0 1px black;
+}
+
+a {
+   outline: 0;
+}
+
+.description {
+    color: #c45525;
+    font-family: "Open Sans", sans-serif;
+    font-size: small;
+    text-align: center;
+    text-justify: inter-word;
+    text-decoration: none;
+}
+
+.foodsearch {
+    color: #c45525;
+    font-family: "Open Sans", sans-serif;
+}
+
+.val-nut-100g {
+    height: 300px;
+    max-width: 500px;
+}
+
+.img-about {
+    height: 200px;
+    text-align: center;
+}
+
+.img-product {
+    height: 175px;
+    max-width: 200px;
+    text-align: center;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #c45525;
+    color: white;
+    text-align: center;
+}
+
+.footer-link {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: "Scope One", sans-serif;
+}
+
+
+.footer-link:hover {
+    color: white;
+    font-family: "Scope One", sans-serif;
+}
+
+
+.nutriscore {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    padding: 4px 9px;
+    border: 2px solid white;
+    border-radius:100px;
+    background: -webkit-linear-gradient(top, rgb(255, 233, 217) 0%, #5d5c44 100%);
+    box-shadow: 0 1px 2px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.4), 0 0 1px rgba(0,0,0,.7) inset, 0 10px 0px rgba(255,255,255,.11) inset;
+    -webkit-background-clip: padding-box;
+    font:bold 16px/20px "Helvetica Neue", sans-serif;
+    color: white;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.6);
+}
+
+.nutriscore.A{
+    background: -webkit-linear-gradient(top, #74ba96 0%, #038141 100%);
+}
+.nutriscore.B{
+    background: -webkit-linear-gradient(top, #bcda8c 0%, #85bb2f 100%);
+}
+.nutriscore.C{
+    background: -webkit-linear-gradient(top, #ffe373 0%, #fecb02 100%);
+}
+.nutriscore.D{
+    background: -webkit-linear-gradient(top, #f6ba72 0%, #ee8100 100%);
+}
+.nutriscore.E{
+    background: -webkit-linear-gradient(top, #f1947b 0%, #e63e11 100%);
+}
+.nutriscore.Z {
+    background: -webkit-linear-gradient(top, #f1947b 0%, #e63e11 100%);
+}
+
+/*CSS For modal image :*/
+/* Style the Image Used to Trigger the Modal */
+#valnut {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#valnut:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    /*position: fixed; !* Stay in place *!*/
+    z-index: 1; /* Sit on top */
+    padding-top: 90px; /* Location of the box */
+    /*padding: 5rem 0;*/
+    left: 0;
+    top: 60px;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: none; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: auto;
+    /*width: auto;*/
+    height: 80% ;
+    max-height: 600px;
+    /*max-width: 700px;*/
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}

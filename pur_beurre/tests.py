@@ -1,5 +1,8 @@
 from django.contrib.auth.models import AnonymousUser, User
 from django.test import RequestFactory, TestCase
+from unittest.mock import patch
+from pur_beurre.management.commands import fill_database
+
 
 from .models import *
 from django.urls import reverse
@@ -107,3 +110,52 @@ class AnonUser(TestCase):
         request.user = self.user
         response = profile(request)
         self.assertEqual(response.status_code, 302)
+
+
+class FillDatabase(TestCase):
+    def setUp(self):
+        self.command = fill_database.Command()
+
+    @patch("requests.get")
+    def test_cat_request(self, get):
+        response = self.command.category_request_api()
+        self.assertTrue(get.called)
+
+    def test_cat_to_db(self):
+        request_dict = {'tags': [
+            {'name': 'test',
+             'url': 'http://test.com',
+             'products': 1,
+             'id': 'testid'}
+        ]}
+        self.command.save_cat_to_db(request_dict)
+        self.assertEqual(Categories.objects.count(), 1)
+
+    def test_food_to_db(self):
+        request_dict = {'products': [
+            {'product_name': 'test',
+             'code': '298392',
+             'brands': 'testb',
+             'nutrition_grades': 'B',
+             'ingredients_text': 'testdescription',
+             'url': 'http://test.com',
+             'image_url': 'http://testimage.com',
+             'categories': 'test1, test2'}
+        ]}
+        self.command.save_food_to_db(request_dict)
+        f = Product.objects.first()
+        self.assertEqual(Product.objects.count(), 1)
+
+    def test_add_entry_to_db(self):
+        name = 'testname'
+        brand = 'testbrand'
+        nutriscore = 'A'
+        itemcode = '389289'
+        image = 'http://www.test.com'
+        url = 'http://testurl.com'
+        openfoodfacts_link = 'http://offtestlink.com'
+
+        self.command.add_to_db(name, brand, nutriscore, itemcode,
+                               image, url, openfoodfacts_link)
+        self.assertEqual(Product.objects.count(), 1)
+

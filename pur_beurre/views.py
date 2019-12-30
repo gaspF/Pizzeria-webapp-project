@@ -10,8 +10,6 @@ from pur_beurre.models import Product
 from pur_beurre.forms import FoodRequestForm
 from django.core.paginator import Paginator
 
-logger = logging.getLogger(__name__)
-
 class Index(View):
     form = FoodRequestForm
     template_name = "pur_beurre/pages/index.html"

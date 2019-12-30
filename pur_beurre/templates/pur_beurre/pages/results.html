@@ -26,9 +26,6 @@
                     <center><img src="{{ food.image }}" alt="food_image" class="sr-icons img-product"></center>
                   </a>
                   <p class="text-center food_title">{{ food.name }} de la marque {{ food.brand }}</p>
-                  {% if user.is_authenticated %}
-                    <div class="save_button_placeholder"></div>
-                  {% endif %}
                 </div>
               </div>
             {% endfor %}

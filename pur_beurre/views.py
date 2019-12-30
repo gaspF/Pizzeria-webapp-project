@@ -1,4 +1,3 @@
-import logging
 from django.utils.decorators import method_decorator
 from .models import Product, SavedProduct
 from django.contrib.auth.decorators import login_required

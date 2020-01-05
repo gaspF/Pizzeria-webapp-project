@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AnonymousUser, User
 from django.test import RequestFactory, TestCase
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 from pur_beurre.management.commands import fill_database
 
 
@@ -119,6 +119,14 @@ class FillDatabase(TestCase):
     @patch("requests.get")
     def test_cat_request(self, get):
         response = self.command.category_request_api()
+        self.assertTrue(get.called)
+
+    @patch('requests.get')
+    def test_food_request(self, get):
+        category = MagicMock()
+        category.off_id = 'test'
+
+        response = self.command.food_request(category)
         self.assertTrue(get.called)
 
     def test_cat_to_db(self):

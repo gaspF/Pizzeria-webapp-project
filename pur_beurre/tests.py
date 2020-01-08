@@ -167,3 +167,8 @@ class FillDatabase(TestCase):
                                image, url, openfoodfacts_link)
         self.assertEqual(Product.objects.count(), 1)
 
+    def test_func(self):
+        save = self.get_object()
+        if self.request.user == save.saved_by:
+            return True
+        return False

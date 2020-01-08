@@ -180,14 +180,8 @@ class UserSavedProductsList(ListView):
             yield l[i:i + n]
 
 
-
-class SaveDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class SaveDelete(DeleteView):
     model = SavedProduct
     template_name = 'pur_beurre/pages/save_confirm_delete.html'
     success_url = '/saved_products'
 
-    def test_func(self):
-        save = self.get_object()
-        if self.request.user == save.saved_by:
-            return True
-        return False

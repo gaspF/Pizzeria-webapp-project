@@ -32,7 +32,7 @@ class Command(BaseCommand):
         self.stdout.write("Sauvegarde des catégories dans la base de données")
         self.save_cat_to_db(categories_dict)
 
-        cat_amount = 10
+        cat_amount = 6
 
         categories = Categories.objects.all()
 

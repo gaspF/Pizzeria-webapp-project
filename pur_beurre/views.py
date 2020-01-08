@@ -1,13 +1,16 @@
 from django.utils.decorators import method_decorator
 from .models import Product, SavedProduct
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db import IntegrityError
-from django.views.generic import ListView
+from django.views.generic import ListView, DeleteView
 from django.views import View
 from django.shortcuts import render
 from pur_beurre.models import Product
 from pur_beurre.forms import FoodRequestForm
 from django.core.paginator import Paginator
+
+
 
 class Index(View):
     form = FoodRequestForm
@@ -178,3 +181,13 @@ class UserSavedProductsList(ListView):
 
 
 
+class SaveDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = SavedProduct
+    template_name = 'pur_beurre/pages/save_confirm_delete.html'
+    success_url = '/saved_products'
+
+    def test_func(self):
+        save = self.get_object()
+        if self.request.user == save.saved_by:
+            return True
+        return False

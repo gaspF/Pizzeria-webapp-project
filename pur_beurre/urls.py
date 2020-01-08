@@ -10,5 +10,5 @@ urlpatterns = [
     path('save', SaveProduct.as_view(), name='pur-beurre-save'),
     path('legal_notices', Legal.as_view(), name='legal_notices'),
     path('saved_products/', login_required(views.UserSavedProductsList.as_view()), name='saved-products'),
-
+    path('save/<int:pk>/delete/', views.SaveDelete.as_view(), name='save-delete'),
 ]

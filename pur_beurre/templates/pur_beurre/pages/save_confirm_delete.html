@@ -1,0 +1,26 @@
+{% extends 'pur_beurre/layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="delete">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="content-section">
+                    <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Suppression de produit sauvegardé</legend>
+                        <p>Voulez-vous supprimer le produit "{{ object.saved_product.name }}" de vos produits sauvegardés ?</p>
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-danger" type="submit">Oui, supprimer</button>
+                        <a class="btn btn-outline-secondary" href="{% url 'saved-products' %}">Annuler</a>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

@@ -26,6 +26,7 @@
                      <span class="nutriscore {{ food.saved_product.nutriscore }}">{{ food.saved_product.nutriscore|upper}}</span>
                   <p class="text-center food_title">{{ food.saved_product.name }} par {{ food.saved_product.brand }}</p>
                 </div>
+                <a href="{% url 'save-delete' food.id %}">Supprimer le produit</a>
               </div>
             {% endfor %}
       </div>

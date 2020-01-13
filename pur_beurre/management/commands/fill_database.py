@@ -9,11 +9,15 @@ from django.db.utils import IntegrityError, DataError
 
 class Command(BaseCommand):
     def category_request_api(self):
+        """ Getting a categories's json file from a specified request to OpenfoodFacts
+        """
         url = "https://fr.openfoodfacts.org/categories&json=1"
         request = requests.get(url)
         return request.json()
 
     def food_request(self, category):
+        """ Getting a product's json file from a specified request to OpenfoodFacts
+                """
         url = "https://fr.openfoodfacts.org/cgi/search.pl"
         params = {"action": "process",
                   "tagtype_0": "categories",
@@ -27,6 +31,8 @@ class Command(BaseCommand):
         return request.json()
 
     def handle(self, *args, **options):
+        """ Saving categories and products data into database
+                """
         self.stdout.write("Obtention des catégories d'Openfood Facts")
         categories_dict = self.category_request_api()
         self.stdout.write("Sauvegarde des catégories dans la base de données")
@@ -44,6 +50,8 @@ class Command(BaseCommand):
             cat_amount -= 1
 
     def save_cat_to_db(self, request_dict):
+        """ Saving categories data to database script.
+                """
         categories_list = request_dict["tags"][:3]
         for category in categories_list:
             name = self.request_cleaner(category["name"])
@@ -58,6 +66,8 @@ class Command(BaseCommand):
                 entry.save()
 
     def save_food_to_db(self, request_dict):
+        """ Saving products data to database script.
+                        """
         food_list = request_dict["products"]
         for food in food_list:
             openfoodfacts_link = "https://fr.openfoodfacts.org/produit/" + food['code']
@@ -84,6 +94,8 @@ class Command(BaseCommand):
             self.add_relationship(food_categories, entry)
 
     def add_to_db(self, name, brand, nutriscore, description, openfoodfacts_link, itemcode, image):
+        """ Creating entries to database script.
+                        """
         try:
             entry = Product()
             entry.name = name
@@ -101,6 +113,8 @@ class Command(BaseCommand):
             pass
 
     def add_relationship(self, food_category, entry):
+        """ Building relationship for many to many relationship in Database script
+                        """
         try:
             for food_category in food_category:
                 food_category = self.request_cleaner(food_category)
@@ -110,6 +124,8 @@ class Command(BaseCommand):
             pass
 
     def request_cleaner(self, my_request):
+        """ Cleaning request script
+                        """
         mr = my_request
         for character in punctuation:
             my_request = my_request.replace(character, '')

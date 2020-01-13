@@ -1,7 +1,6 @@
 from django.utils.decorators import method_decorator
 from .models import Product, SavedProduct
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db import IntegrityError
 from django.views.generic import ListView, DeleteView
 from django.views import View
@@ -13,6 +12,8 @@ from django.core.paginator import Paginator
 
 
 class Index(View):
+    """ Returning the Index template view and getting the user's product request in it
+    """
     form = FoodRequestForm
     template_name = "pur_beurre/pages/index.html"
 
@@ -23,6 +24,8 @@ class Index(View):
 
 
 class Legal(View):
+    """ Returning the legal template view
+        """
     template_name = "pur_beurre/pages/legal_notices.html"
 
     def get(self, request):
@@ -30,6 +33,8 @@ class Legal(View):
 
 
 class Results(View):
+    """ Returning the products result template view, and returning the results by a research in the database
+        """
     form = FoodRequestForm
     template_name = "pur_beurre/pages/results.html"
 
@@ -60,6 +65,9 @@ class Results(View):
 
 
 class Substitutes(View):
+    """ Returning the substitutes result template view, and returning the results by a research in the database by
+    filtering out all the lesser nutrition grade products
+            """
     template_name = 'pur_beurre/pages/substitutes.html'
 
     def get(self, request, id):
@@ -125,6 +133,8 @@ class Food(View):
 
 
 class SaveProduct(View):
+    """Saving product process. If it already exists in the database, it cannot be saved twice
+    """
     template_name = 'pur_beurre/pages/save.html'
 
     @method_decorator(login_required)
@@ -153,6 +163,8 @@ class SaveProduct(View):
 
 
 class UserSavedProductsList(ListView):
+    """Displaying user's favorites products.
+    """
     model = SavedProduct
     template_name = 'pur_beurre/pages/saved_products.html'
     paginate_by = 6
@@ -181,6 +193,7 @@ class UserSavedProductsList(ListView):
 
 
 class SaveDelete(DeleteView):
+    """Deleting a favorite product from the favorites list"""
     model = SavedProduct
     template_name = 'pur_beurre/pages/save_confirm_delete.html'
     success_url = '/saved_products'

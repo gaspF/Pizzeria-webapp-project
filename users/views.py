@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 
 
 def register(request):
+    """Allow the user to register by posting a request
+    """
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -19,5 +21,7 @@ def register(request):
 
 @login_required
 def profile(request):
+    """Displaying the profile template which contains user's personal data
+    """
     return render(request, 'users/profile.html')
 

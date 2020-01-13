@@ -3,6 +3,8 @@ from django.db import models
 
 
 class Categories(models.Model):
+    """ Category class for Django's ORM.
+                    """
     name = models.CharField(max_length=500, unique=True)
     product_count = models.IntegerField(default=0)
     url = models.URLField()
@@ -13,6 +15,8 @@ class Categories(models.Model):
 
 
 class Product(models.Model):
+    """ Product class for Django's ORM.
+                        """
     name = models.CharField(verbose_name="Nom", max_length=150)
     nutriscore = models.CharField(verbose_name='Nutriscore', max_length=1)
     brand = models.CharField(verbose_name='Marque', max_length=200, blank=True)
@@ -23,10 +27,14 @@ class Product(models.Model):
     categories = models.ManyToManyField('Categories')
 
     def __str__(self):
+        """ For testing purpose, return the Product's name in the form of its str name
+                            """
         return self.name
 
 
 class SavedProduct(models.Model):
+    """ Saved products class for Django's ORM. Many to many table
+                        """
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['saved_by', 'saved_product'], name='saved_association'),
@@ -36,6 +44,8 @@ class SavedProduct(models.Model):
     saved_product = models.ForeignKey(Product, verbose_name='Produit sauvegardé', on_delete=models.CASCADE,)
 
     def __str__(self):
+        """ For testing purpose, return the saved product's name in the form of its str name
+                                    """
         return self.saved_product
 
 

@@ -10,7 +10,6 @@ from pur_beurre.forms import FoodRequestForm
 from django.core.paginator import Paginator
 
 
-
 class Index(View):
     """ Returning the Index template view and getting the user's product request in it
     """

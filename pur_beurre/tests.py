@@ -5,7 +5,7 @@ from unittest.mock import patch, MagicMock
 from pur_beurre.management.commands import fill_database
 from .models import *
 from django.urls import reverse
-from .views import UserSavedProductsList
+from .views import UserSavedProductsList, SaveDelete
 from users.views import profile, register
 
 
@@ -108,9 +108,13 @@ class UserLoggedIn(TestCase):
         """ Testing delete function
                                                 """
         request = self.factory.get(reverse('save-delete', args=[1]))
+        request.user = self.user
+        response = SaveDelete.as_view()(request, pk=1)
+        self.assertContains(response, "Suppression de produit")
         if self.user.username == self.save.saved_by:
             return True
         return False
+
 
     def test_user_profile_page_logged_in(self):
         """ Testing if the logged user get the correct information about himself on profile view

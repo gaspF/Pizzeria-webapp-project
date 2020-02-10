@@ -106,15 +106,15 @@ class UserLoggedIn(TestCase):
 
     def test_delete_func(self):
         """ Testing delete function
-                                                """
-        request = self.factory.get(reverse('save-delete', args=[1]))
-        request.user = self.user
-        response = SaveDelete.as_view()(request, pk=1)
-        self.assertContains(response, "Suppression de produit")
-        if self.user.username == self.save.saved_by:
-            return True
-        return False
+                                              """
+        request = self.client.get(reverse('save-delete', args=[1]), follow=True)
+        self.assertContains(request, 'Suppression de produit')
 
+    """
+    def test_response_delete_func(self):
+        response = self.client.post(reverse('save-delete', args=[1]), follow=True)
+        self.assertRedirects(response, reverse('saved-products'), status_code=response.status_code)
+        """
 
     def test_user_profile_page_logged_in(self):
         """ Testing if the logged user get the correct information about himself on profile view
@@ -133,6 +133,7 @@ class UserLoggedIn(TestCase):
         response = UserSavedProductsList.as_view()(request)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Produits sauvés par Patrick")
+        self.assertContains(response, "testname")
 
 
 class AnonUser(TestCase):

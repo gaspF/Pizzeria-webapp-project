@@ -5,7 +5,7 @@ from unittest.mock import patch, MagicMock
 from pur_beurre.management.commands import fill_database
 from .models import *
 from django.urls import reverse
-from .views import UserSavedProductsList, SaveDelete
+from .views import UserSavedProductsList, SaveDelete, Food
 from users.views import profile, register
 
 
@@ -134,6 +134,11 @@ class UserLoggedIn(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Produits sauvés par Patrick")
         self.assertContains(response, "testname")
+
+    def test_redirect_food(self):
+        request = self.client.get(reverse('pur-beurre-food', args=[1]))
+        self.assertEqual(request.status_code, 200)
+        self.assertContains(request, "Ingrédients")
 
 
 class AnonUser(TestCase):
